@@ -1,0 +1,31 @@
+package com.proglab.polls.entities;
+
+import javax.persistence.*;
+
+@Entity
+public class Answer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
+    private Integer id;
+
+    @Column
+    private String text;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "question_ID")
+    private Question question;
+
+    public Answer() {
+
+    }
+
+    public Answer(String text) {
+        this.text = text;
+    }
+
+    public void setId(Integer id) {this.id = id;}
+    public Integer getId() {return id;}
+    public void setText(String text) {this.text = text;}
+    public String getText() {return text;}
+}
