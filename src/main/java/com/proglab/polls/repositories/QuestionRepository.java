@@ -8,8 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.repository.CrudRepository;
 
 public interface QuestionRepository extends CrudRepository<Question, Integer> {
-    <Optional>Question findById(Integer id);
-
     //get questions by userID
 
     List<Question> findByTextContaining(String keyword);
