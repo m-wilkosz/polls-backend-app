@@ -1,6 +1,7 @@
 package com.proglab.polls.repositories;
 
 import java.util.List;
+import java.util.Optional;
 import org.joda.time.DateTime;
 import com.proglab.polls.entities.User;
 import org.springframework.data.jpa.repository.Query;
@@ -8,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Integer> {
-    User findByUsername(String username);
+    Optional<User> findByUsername(String username);
 
     //count questions by ID
 

@@ -1,6 +1,7 @@
 package com.proglab.polls.services;
 
 import java.util.List;
+import java.util.Optional;
 import org.joda.time.DateTime;
 import com.proglab.polls.entities.User;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class UserServiceImp implements UserService {
     public void deleteUser(Integer id) {userRepository.deleteById(id);}
 
     @Override
-    public <Optional>User getUserByUsername(String username) {return userRepository.findByUsername(username);}
+    public Optional<User> getUserByUsername(String username) {return userRepository.findByUsername(username);}
 
     @Override
     public Iterable<User> listAllUsers() {return userRepository.findAll();}

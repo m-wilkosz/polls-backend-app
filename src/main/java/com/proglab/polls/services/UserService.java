@@ -1,6 +1,7 @@
 package com.proglab.polls.services;
 
 import java.util.List;
+import java.util.Optional;
 import org.joda.time.DateTime;
 import com.proglab.polls.entities.User;
 
@@ -9,7 +10,7 @@ public interface UserService {
 
     void deleteUser(Integer id);
 
-    <Optional>User getUserByUsername(String username);
+    Optional<User> getUserByUsername(String username);
 
     Iterable<User> listAllUsers();
 
