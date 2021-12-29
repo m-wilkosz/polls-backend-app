@@ -3,7 +3,9 @@ package com.proglab.polls.controllers;
 import org.joda.time.DateTime;
 import com.proglab.polls.entities.User;
 import org.springframework.http.MediaType;
+import com.proglab.polls.entities.Question;
 import com.proglab.polls.services.UserService;
+import com.proglab.polls.services.QuestionService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ public class IndexController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private QuestionService questionService;
+
     @GetMapping(value = "")
     String index() {return "index";}
 
@@ -23,13 +28,25 @@ public class IndexController {
     public String generate() {
         DateTime date = DateTime.now();
 
-        User user1 = new User("user1", "mw98@gmail.com", date.minusDays(10), date.minusDays(5));
-        User user2 = new User("user2", "adam_m@gmail.com", date.minusDays(7), date.minusDays(4));
-        User user3 = new User("user3", "j_smith@gmail.com", date.minusDays(1), date);
+        Question q1 = new Question("how many hours do you sleep?", date);
+        Question q2 = new Question("where are you from?", date);
+        Question q3 = new Question("what is your favourite color?", date);
 
-        userService.saveUser(user1);
-        userService.saveUser(user2);
-        userService.saveUser(user3);
+        User u1 = new User("user1", "mw98@gmail.com", date.minusDays(10), date.minusDays(5));
+
+        u1.getQuestions().add(q1);
+        u1.getQuestions().add(q2);
+        u1.getQuestions().add(q3);
+
+        userService.saveUser(u1);
+
+        q1.setUser(u1);
+        q2.setUser(u1);
+        q3.setUser(u1);
+
+        questionService.saveQuestion(q1);
+        questionService.saveQuestion(q2);
+        questionService.saveQuestion(q3);
 
         return "generated";
     }
