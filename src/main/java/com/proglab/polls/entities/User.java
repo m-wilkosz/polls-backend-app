@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import javax.persistence.*;
 import java.util.Collection;
 import org.joda.time.DateTime;
-import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -12,25 +11,21 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
+    @Column(nullable = false)
     private Integer id;
 
-    @Column
-    @NotNull
+    @Column(nullable = false)
     private String username;
 
-    @Column
-    @NotNull
+    @Column(nullable = false)
     private String emailAddress;
 
-    @Column(length = 256)
+    @Column(length = 256, nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @NotNull
     private DateTime joiningDate;
 
-    @Column(length = 256)
+    @Column(length = 256, nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @NotNull
     private DateTime lastActive;
 
     @JsonManagedReference

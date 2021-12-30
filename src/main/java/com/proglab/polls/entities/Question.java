@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import javax.persistence.*;
 import java.util.Collection;
 import org.joda.time.DateTime;
-import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -16,19 +15,16 @@ public class Question {
     @Column
     private Integer id;
 
-    @Column
-    @NotNull
+    @Column(nullable = false)
     private String text;
 
-    @Column(length = 256)
-    @NotNull
+    @Column(length = 256, nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private DateTime added;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    @NotNull
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @JsonManagedReference

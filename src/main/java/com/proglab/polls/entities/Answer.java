@@ -1,7 +1,6 @@
 package com.proglab.polls.entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
@@ -11,14 +10,12 @@ public class Answer {
     @Column
     private Integer id;
 
-    @Column
-    @NotNull
+    @Column(nullable = false)
     private String text;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "question_id")
-    @NotNull
+    @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 
     public Answer() {
