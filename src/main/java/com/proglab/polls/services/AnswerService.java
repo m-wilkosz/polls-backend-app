@@ -2,6 +2,7 @@ package com.proglab.polls.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Collection;
 import com.proglab.polls.entities.Answer;
 
 public interface AnswerService {
@@ -15,5 +16,5 @@ public interface AnswerService {
 
     List<Answer> getByTextContaining(String keyword);
 
-    //get by questionID
+    Collection<Answer> getAnswersByQuestionId(Integer id);
 }

@@ -2,6 +2,7 @@ package com.proglab.polls.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Collection;
 import org.joda.time.DateTime;
 import com.proglab.polls.entities.Question;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,9 @@ public class QuestionServiceImp implements QuestionService {
 
     @Override
     public Optional<Question> getById(Integer id) {return questionRepository.findById(id);}
+
+    @Override
+    public Collection<Question> getQuestionsByUserId(Integer id) {return questionRepository.findQuestionsByUserId(id);}
 
     @Override
     public List<Question> getByTextContaining(String keyword) {return questionRepository.findByTextContaining(keyword);}

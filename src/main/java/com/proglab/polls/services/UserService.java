@@ -2,8 +2,10 @@ package com.proglab.polls.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Collection;
 import org.joda.time.DateTime;
 import com.proglab.polls.entities.User;
+import com.proglab.polls.entities.Question;
 
 public interface UserService {
     User saveUser(User user);
@@ -14,13 +16,13 @@ public interface UserService {
 
     Iterable<User> listAllUsers();
 
-    //count questions by ID
+    Integer getNumberOfQuestionsByUserId(Integer id);
 
-    //get questions by ID
+    Collection<Question> getQuestionsByUserId(Integer id);
 
     List<User> getLastActiveUsersAfter(DateTime date);
 
     Integer getNumberOfUsersJoinedAfter(DateTime date);
 
-    //get most active user
+    User getMostActiveUser();
 }

@@ -2,6 +2,7 @@ package com.proglab.polls.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Collection;
 import com.proglab.polls.entities.Answer;
 import org.springframework.stereotype.Service;
 import com.proglab.polls.repositories.AnswerRepository;
@@ -26,4 +27,7 @@ public class AnswerServiceImp implements AnswerService {
 
     @Override
     public List<Answer> getByTextContaining(String keyword) {return answerRepository.findByTextContaining(keyword);}
+
+    @Override
+    public Collection<Answer> getAnswersByQuestionId(Integer id) {return answerRepository.findAnswersByQuestionId(id);}
 }
