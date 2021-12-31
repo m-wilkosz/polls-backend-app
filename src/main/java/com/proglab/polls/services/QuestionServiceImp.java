@@ -5,8 +5,8 @@ import java.util.Optional;
 import java.util.Collection;
 import org.joda.time.DateTime;
 import com.proglab.polls.entities.Question;
-import org.springframework.stereotype.Service;
 import com.proglab.polls.repositories.QuestionRepository;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
@@ -21,13 +21,13 @@ public class QuestionServiceImp implements QuestionService {
     public void deleteQuestion(Integer id) {questionRepository.deleteById(id);}
 
     @Override
-    public Iterable<Question> listAllQuestions() {return questionRepository.findAll();}
+    public Iterable<Question> getAllQuestions() {return questionRepository.findAll();}
 
     @Override
     public Optional<Question> getById(Integer id) {return questionRepository.findById(id);}
 
     @Override
-    public Collection<Question> getQuestionsByUserId(Integer id) {return questionRepository.findQuestionsByUserId(id);}
+    public Collection<Question> getByUserId(Integer id) {return questionRepository.findByUserId(id);}
 
     @Override
     public List<Question> getByTextContaining(String keyword) {return questionRepository.findByTextContaining(keyword);}

@@ -1,7 +1,7 @@
 package com.proglab.polls.entities;
 
-import java.util.ArrayList;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonFormat;
