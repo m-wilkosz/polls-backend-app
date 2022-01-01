@@ -3,6 +3,8 @@ package com.proglab.polls.entities;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -10,7 +12,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
+    @SequenceGenerator(name = "user_generator", sequenceName = "user_seq", allocationSize = 50)
     @Column(nullable = false)
     private Integer id;
 
@@ -30,6 +33,7 @@ public class User {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @NotFound(action = NotFoundAction.IGNORE)
     private Collection<Question> questions = new ArrayList<>();
 
     public User() {

@@ -22,6 +22,9 @@ public class UserServiceImp implements UserService {
     public void deleteUser(Integer id) {userRepository.deleteById(id);}
 
     @Override
+    public Optional<User> getById(Integer id) {return userRepository.findById(id);}
+
+    @Override
     public Optional<User> getByUsername(String username) {return userRepository.findByUsername(username);}
 
     @Override

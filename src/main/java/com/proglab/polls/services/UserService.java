@@ -14,6 +14,8 @@ public interface UserService {
 
     void deleteUser(Integer id);
 
+    Optional<User> getById(Integer id);
+
     Optional<User> getByUsername(String username);
 
     Iterable<User> getAllUsers();

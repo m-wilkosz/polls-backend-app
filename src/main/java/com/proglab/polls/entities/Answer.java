@@ -2,11 +2,14 @@ package com.proglab.polls.entities;
 
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 @Entity
 public class Answer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "answer_generator")
+    @SequenceGenerator(name = "answer_generator", sequenceName = "answer_seq", allocationSize = 50)
     @Column
     private Integer id;
 
@@ -15,6 +18,7 @@ public class Answer {
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 

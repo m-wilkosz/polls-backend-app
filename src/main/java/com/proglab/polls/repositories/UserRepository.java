@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
+    Optional<User> findById(Integer id);
+
     Optional<User> findByUsername(String username);
 
     @Query("select count(q) from User u join u.questions q where u.id = ?1")
