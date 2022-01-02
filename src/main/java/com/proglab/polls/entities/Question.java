@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "question_generator")
-    @SequenceGenerator(name = "question_generator", sequenceName = "question_seq", allocationSize = 50)
+    @SequenceGenerator(name = "question_generator", sequenceName = "question_seq")
     @Column
     private Integer id;
 

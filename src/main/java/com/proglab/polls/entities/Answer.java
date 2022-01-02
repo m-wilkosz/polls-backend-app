@@ -9,7 +9,7 @@ import org.hibernate.annotations.NotFoundAction;
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "answer_generator")
-    @SequenceGenerator(name = "answer_generator", sequenceName = "answer_seq", allocationSize = 50)
+    @SequenceGenerator(name = "answer_generator", sequenceName = "answer_seq")
     @Column
     private Integer id;
 

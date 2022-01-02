@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
-    @SequenceGenerator(name = "user_generator", sequenceName = "user_seq", allocationSize = 50)
+    @SequenceGenerator(name = "user_generator", sequenceName = "user_seq")
     @Column(nullable = false)
     private Integer id;
 

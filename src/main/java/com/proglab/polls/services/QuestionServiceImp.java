@@ -33,7 +33,7 @@ public class QuestionServiceImp implements QuestionService {
     public List<Question> getByTextContaining(String keyword) {return questionRepository.findByTextContaining(keyword);}
 
     @Override
-    public List<Question> getByAdded(DateTime date) {return questionRepository.findByAdded(date);}
+    public List<Question> getByAdded(DateTime date1, DateTime date2) {return questionRepository.findByAdded(date1, date2);}
 
     @Override
     public List<Question> getByAddedAfter(DateTime date) {return questionRepository.findByAddedAfter(date);}

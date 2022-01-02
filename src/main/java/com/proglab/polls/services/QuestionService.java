@@ -21,7 +21,7 @@ public interface QuestionService {
 
     List<Question> getByTextContaining(String keyword);
 
-    List<Question> getByAdded(DateTime date);
+    List<Question> getByAdded(DateTime date1, DateTime date2);
 
     List<Question> getByAddedAfter(DateTime date);
 }
