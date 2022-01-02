@@ -1,25 +1,32 @@
 package com.proglab.polls.services;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Collection;
 import org.joda.time.DateTime;
 import com.proglab.polls.entities.User;
+import com.proglab.polls.entities.Question;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface UserService {
     User saveUser(User user);
 
     void deleteUser(Integer id);
 
-    <Optional>User getUserByUsername(String username);
+    Optional<User> getById(Integer id);
 
-    Iterable<User> listAllUsers();
+    Optional<User> getByUsername(String username);
 
-    //count questions by ID
+    Iterable<User> getAllUsers();
 
-    //get questions by ID
+    Integer getNumOfQuestionsById(Integer id);
 
-    List<User> getLastActiveUsersAfter(DateTime date);
+    Collection<Question> getQuestionsById(Integer id);
 
-    Integer getNumberOfUsersJoinedAfter(DateTime date);
+    List<User> getActiveAfter(DateTime date);
 
-    //get most active user
+    Integer getNumOfJoinedAfter(DateTime date);
+
+    User getMostActive();
 }

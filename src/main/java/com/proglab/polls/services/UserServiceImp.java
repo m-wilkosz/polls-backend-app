@@ -1,10 +1,13 @@
 package com.proglab.polls.services;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Collection;
 import org.joda.time.DateTime;
 import com.proglab.polls.entities.User;
-import org.springframework.stereotype.Service;
+import com.proglab.polls.entities.Question;
 import com.proglab.polls.repositories.UserRepository;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
@@ -19,20 +22,38 @@ public class UserServiceImp implements UserService {
     public void deleteUser(Integer id) {userRepository.deleteById(id);}
 
     @Override
-    public <Optional>User getUserByUsername(String username) {return userRepository.findByUsername(username);}
+    public Optional<User> getById(Integer id) {return userRepository.findById(id);}
 
     @Override
-    public Iterable<User> listAllUsers() {return userRepository.findAll();}
-
-    //count questions by ID
-
-    //get questions by ID
+    public Optional<User> getByUsername(String username) {return userRepository.findByUsername(username);}
 
     @Override
-    public List<User> getLastActiveUsersAfter(DateTime date) {return userRepository.findByLastActiveAfter(date);}
+    public Iterable<User> getAllUsers() {return userRepository.findAll();}
 
     @Override
-    public Integer getNumberOfUsersJoinedAfter(DateTime date) {return userRepository.countJoinedAfterDate(date);}
+    public Integer getNumOfQuestionsById(Integer id) {return userRepository.countQuestionsById(id);};
 
-    //get most active user
+    @Override
+    public Collection<Question> getQuestionsById(Integer id) {return userRepository.findQuestionsById(id);};
+
+    @Override
+    public List<User> getActiveAfter(DateTime date) {return userRepository.findActiveAfter(date);}
+
+    @Override
+    public Integer getNumOfJoinedAfter(DateTime date) {return userRepository.countJoinedAfter(date);}
+
+    @Override
+    public User getMostActive() {
+        Integer max = 0, n = 0;
+        User uMax = null;
+        Iterable<User> users = userRepository.findAll();
+        for (User u : users) {
+            n = userRepository.countQuestionsById(u.getId());
+            if (n > max) {
+                max = n;
+                uMax = u;
+            }
+        }
+        return uMax;
+    }
 }

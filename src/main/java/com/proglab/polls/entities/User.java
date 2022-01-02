@@ -1,26 +1,40 @@
 package com.proglab.polls.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.joda.time.DateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
+    @SequenceGenerator(name = "user_generator", sequenceName = "user_seq")
+    @Column(nullable = false)
     private Integer id;
 
-    @Column
+    @Column(nullable = false)
     private String username;
 
-    @Column
+    @Column(nullable = false)
     private String emailAddress;
 
-    @Column
+    @Column(length = 256, nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private DateTime joiningDate;
 
-    @Column
+    @Column(length = 256, nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private DateTime lastActive;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @NotFound(action = NotFoundAction.IGNORE)
+    private Collection<Question> questions = new ArrayList<>();
 
     public User() {
 
@@ -43,4 +57,6 @@ public class User {
     public DateTime getJoiningDate() {return joiningDate;}
     public void setLastActive(DateTime lastActive) {this.lastActive = lastActive;}
     public DateTime getLastActive() {return lastActive;}
+    public void setQuestions(Collection<Question> questions) {this.questions = questions;}
+    public Collection<Question> getQuestions() {return questions;}
 }
