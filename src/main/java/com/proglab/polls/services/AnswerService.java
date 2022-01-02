@@ -14,7 +14,7 @@ public interface AnswerService {
 
     Iterable<Answer> getAllAnswers();
 
-    Optional<Answer> getByID(Integer id);
+    Optional<Answer> getById(Integer id);
 
     List<Answer> getByTextContaining(String keyword);
 

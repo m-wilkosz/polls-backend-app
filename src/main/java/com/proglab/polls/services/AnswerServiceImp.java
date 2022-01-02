@@ -23,7 +23,7 @@ public class AnswerServiceImp implements AnswerService {
     public Iterable<Answer> getAllAnswers() {return answerRepository.findAll();}
 
     @Override
-    public Optional<Answer> getByID(Integer id) {return answerRepository.findById(id);}
+    public Optional<Answer> getById(Integer id) {return answerRepository.findById(id);}
 
     @Override
     public List<Answer> getByTextContaining(String keyword) {return answerRepository.findByTextContaining(keyword);}

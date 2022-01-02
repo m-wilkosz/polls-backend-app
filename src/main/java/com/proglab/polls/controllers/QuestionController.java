@@ -51,7 +51,7 @@ public class QuestionController {
 
     @PutMapping(value = "/question/{id}")
     public ResponseEntity<Void> edit(@RequestBody Question question, @PathVariable Integer id) {
-        Optional<Question> questionFromData = questionService.getById(question.getId());
+        Optional<Question> questionFromData = questionService.getById(id);
         if (Objects.nonNull(questionFromData)) {
             questionFromData.get().setText(question.getText());
             questionFromData.get().setAdded(question.getAdded());
