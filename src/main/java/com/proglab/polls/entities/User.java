@@ -32,7 +32,7 @@ public class User {
     private DateTime lastActive;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
     @NotFound(action = NotFoundAction.IGNORE)
     private Collection<Question> questions = new ArrayList<>();
 

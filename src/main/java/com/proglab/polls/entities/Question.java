@@ -32,7 +32,7 @@ public class Question {
     private User user;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "question", orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "question", orphanRemoval = true)
     @NotFound(action = NotFoundAction.IGNORE)
     private Collection<Answer> answers = new ArrayList<>();
 
