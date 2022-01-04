@@ -20,7 +20,9 @@ public class JSONdata {
     private final QuestionService questionService;
     private final AnswerService answerService;
 
-    ObjectMapper objectMapper = new ObjectMapper().registerModule(new JodaModule());
+    ObjectMapper objectMapper = new ObjectMapper()
+            .registerModule(new JodaModule())
+            .configure(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
     public void importUsersFromFile(String filepath) throws IOException {
         Collection<User> users = objectMapper.readValue(new File(filepath), new TypeReference<Collection<User>>(){});
