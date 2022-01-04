@@ -1,8 +1,9 @@
 package com.proglab.polls.json;
 
-import java.util.Collection;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
 import com.proglab.polls.entities.User;
 import com.proglab.polls.entities.Question;
 import com.proglab.polls.entities.Answer;
@@ -58,6 +59,12 @@ public class JSONdata {
         Iterable<User> users = userService.getAllUsers();
         for (User user : users) {
             objectMapper.writeValue(new File(filepath), user);
+        }
+    }
+
+    public void exportSearchResult(List<Question> questions, String filepath) throws IOException {
+        for (Question question : questions) {
+            objectMapper.writeValue(new File(filepath), question);
         }
     }
 
