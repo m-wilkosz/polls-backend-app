@@ -37,18 +37,22 @@ public class PollsApplication {
 				System.out.println("provide keyword: ");
 				keyword = scan.nextLine();
 				searchedQuestions = questionService.getByTextContaining(keyword);
-				for (Question question : searchedQuestions) {
-					System.out.println("question id: " + question.getId());
-					System.out.println("user id: " + question.getUser().getId());
-					System.out.println("text: " + question.getText());
-					System.out.println();
-				}
-				System.out.println("export query result to json file? (y/n)");
-				c = scan.nextLine();
-				if (c.equals("y")) {
-					System.out.println("provide filepath: ");
-					filepath = scan.nextLine();
-					json.exportSearchResult(searchedQuestions, filepath);
+				if (!searchedQuestions.isEmpty()) {
+					for (Question question : searchedQuestions) {
+						System.out.println("question id: " + question.getId());
+						System.out.println("user id: " + question.getUser().getId());
+						System.out.println("text: " + question.getText());
+						System.out.println();
+					}
+					System.out.println("export query result to json file? (y/n)");
+					c = scan.nextLine();
+					if (c.equals("y")) {
+						System.out.println("provide filepath: ");
+						filepath = scan.nextLine();
+						json.exportSearchResult(searchedQuestions, filepath);
+					}
+				} else {
+					System.out.println("no question containing keyword \"" + keyword + "\"");
 				}
 			} else {
 				System.out.println("provide filepath: ");
@@ -63,6 +67,8 @@ public class PollsApplication {
 			}
 			System.out.println("do you want to exit application? (y/n)");
 			c = scan.nextLine();
+			System.out.print("\033[H\033[2J");
+			System.out.flush();
 		}
 	}
 }

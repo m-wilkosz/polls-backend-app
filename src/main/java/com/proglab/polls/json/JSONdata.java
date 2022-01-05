@@ -24,11 +24,28 @@ public class JSONdata {
             .registerModule(new JodaModule())
             .configure(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
-    public void importUsersFromFile(String filepath) throws IOException {
-        Collection<User> users = objectMapper.readValue(new File(filepath), new TypeReference<Collection<User>>(){});
-        for (User user : users) {
-            userService.saveUser(user);
-            Collection<Question> questions = user.getQuestions();
+    public void importUsersFromFile(String filepath) {
+        try {
+            Collection<User> users = objectMapper.readValue(new File(filepath), new TypeReference<Collection<User>>(){});
+            for (User user : users) {
+                userService.saveUser(user);
+                Collection<Question> questions = user.getQuestions();
+                for (Question question : questions) {
+                    questionService.saveQuestion(question);
+                    Collection<Answer> answers = question.getAnswers();
+                    for (Answer answer : answers) {
+                        answerService.saveAnswer(answer);
+                    }
+                }
+            }
+        } catch (IOException io) {
+            System.out.println(io + ": reading data from file failed");
+        }
+    }
+
+    public void importQuestionsFromFile(String filepath) {
+        try {
+            Collection<Question> questions = objectMapper.readValue(new File(filepath), new TypeReference<Collection<Question>>(){});
             for (Question question : questions) {
                 questionService.saveQuestion(question);
                 Collection<Answer> answers = question.getAnswers();
@@ -36,37 +53,40 @@ public class JSONdata {
                     answerService.saveAnswer(answer);
                 }
             }
+        } catch (IOException io) {
+            System.out.println(io + ": reading data from file failed");
         }
     }
 
-    public void importQuestionsFromFile(String filepath) throws IOException {
-        Collection<Question> questions = objectMapper.readValue(new File(filepath), new TypeReference<Collection<Question>>(){});
-        for (Question question : questions) {
-            questionService.saveQuestion(question);
-            Collection<Answer> answers = question.getAnswers();
+    public void importAnswersFromFile(String filepath) {
+        try {
+            Collection<Answer> answers = objectMapper.readValue(new File(filepath), new TypeReference<Collection<Answer>>(){});
             for (Answer answer : answers) {
                 answerService.saveAnswer(answer);
             }
+        } catch (IOException io) {
+            System.out.println(io + ": reading data from file failed");
         }
     }
 
-    public void importAnswersFromFile(String filepath) throws IOException {
-        Collection<Answer> answers = objectMapper.readValue(new File(filepath), new TypeReference<Collection<Answer>>(){});
-        for (Answer answer : answers) {
-            answerService.saveAnswer(answer);
-        }
-    }
-
-    public void exportToFile(String filepath) throws IOException {
+    public void exportToFile(String filepath) {
         Iterable<User> users = userService.getAllUsers();
-        for (User user : users) {
-            objectMapper.writeValue(new File(filepath), user);
+        try {
+            for (User user : users) {
+                objectMapper.writeValue(new File(filepath), user);
+            }
+        } catch (IOException io) {
+            System.out.println(io + ": writing data to file failed");
         }
     }
 
-    public void exportSearchResult(List<Question> questions, String filepath) throws IOException {
-        for (Question question : questions) {
-            objectMapper.writeValue(new File(filepath), question);
+    public void exportSearchResult(List<Question> questions, String filepath) {
+        try {
+            for (Question question : questions) {
+                objectMapper.writeValue(new File(filepath), question);
+            }
+        } catch (IOException io) {
+            System.out.println(io + ": writing data to file failed");
         }
     }
 
