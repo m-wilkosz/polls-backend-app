@@ -1,6 +1,5 @@
 package com.proglab.polls;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 import com.proglab.polls.entities.Question;
@@ -14,7 +13,7 @@ import org.springframework.context.ApplicationContext;
 @SpringBootApplication
 @EnableJpaRepositories("com.proglab.polls.repositories")
 public class PollsApplication {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		ApplicationContext appContext = SpringApplication.run(PollsApplication.class, args);
 		JSONdata json = new JSONdata(appContext);
 		QuestionService questionService = appContext.getBean(QuestionService.class);
