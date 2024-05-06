@@ -1,5 +1,5 @@
 # Polls Backend App
-[![](https://skills.thijs.gg/icons?i=java,spring,mysql,hibernate,maven)](https://skills.thijs.gg)
+[![](https://skillicons.dev/icons?i=java,spring,mysql,hibernate,maven)](https://skillicons.dev)
 
 Project made with the Spring Boot framework for programming laboratory course.
 
